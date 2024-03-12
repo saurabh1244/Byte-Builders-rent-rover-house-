@@ -1,0 +1,189 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <h1 class='text-blue-800 text-8xl'> this is Detail page </h1>
+
+    <img src="/media/{{ obj.room_images }}" class='h-80 w-80' >
+    <h2> name is {{ obj.room_prize }}</h2>
+    <h2> name is {{ obj.total_rooms }}</h2> 
+    <h2> name is {{ obj.room_location }}</h2>  
+
+
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Detail Page</title>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Room Details</h1>
+        <div class="flex justify-center">
+            <img src="/media/{{ obj.room_images }}" class="h-80 w-80 rounded-lg shadow-lg" alt="Room Image">
+        </div>
+        <div class="mt-6">
+            <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Name:</span> {{ obj.room_prize }}</p>
+            <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Total Rooms:</span> {{ obj.total_rooms }}</p>
+            <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Location:</span> {{ obj.room_location }}</p>
+        </div>
+    </div>
+
+
+    <div>
+           <h2>details:</h2>
+           owner: {{ obj.owner}}
+           room price {{obj.room_prize}}
+           room size : {{ obj.room_size}}
+           totol room : {{obj.total_rooms}}
+           loccation : {{obj.room_location}}
+           line bill : {{obj.line_bill_needed}}
+        
+           
+           smoking : {{obj.smoking}}
+           drinking : {{obj.drinking}}
+
+
+           {% for choice in obj.ROOM_CHOICES %}
+           {% if choice.0 == obj.room_for %}
+               <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Room For:</span> {{ choice.1 }}</p>
+           {% endif %}
+       {% endfor %}
+    </div>
+
+
+
+
+
+</body>
+</html>
+ -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Detail Page</title>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Room Details</h1>
+        <div class="flex justify-center">
+            <img src="/media/{{ obj.room_images }}" class="h-80 w-80 rounded-lg shadow-lg" alt="Room Image">
+        </div>
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Name:</span> {{ obj.room_prize }}</p>
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Total Rooms:</span> {{ obj.total_rooms }}
+                </p>
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Location:</span> {{ obj.room_location }}
+                </p>
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Owner:</span> {{ obj.owner }}</p>
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Room Size:</span> {{ obj.room_size }}</p>
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Line Bill:</span> {{ obj.line_bill_needed
+                    }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg">
+        <div class="mt-6 grid grid-cols-2 gap-4">
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Smoking:</span> {{ obj.smoking }}</p>
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Drinking:</span> {{ obj.drinking }}</p>
+            </div>
+            <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                {% for choice in obj.ROOM_CHOICES %}
+                {% if choice.0 == obj.room_for %}
+                <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Room For:</span> {{ choice.1 }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <p class="text-xl text-gray-800 mb-4"><span class="font-bold">Room description:</span> {{ obj.room_desc }}
+            </p>
+        </div>
+    </div>
+
+
+
+
+    <form method='post'>
+        {% csrf_token %}
+              <button type='submit'> PAY </button>
+                
+     </form>
+
+
+
+
+     <div>
+        <h1>amount = {{amount}}</h1>
+      
+        <button type="submit" id="rzp-button1" >Pay</button>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script>
+          var options = {
+            key: "{{api_key}}", 
+            name: "Acme Corp", 
+            description: "Test Transaction",
+            image: "https://example.com/your_logo",
+            order_id: "{{ order_id }}",  
+            callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+            prefill: {
+              name: "{{name}}", 
+              email: "haala@gmail.com",
+              contact: "3223523523", //Provide the customer's phone number for better conversion rates
+            },
+            notes: {
+              address: "BHilai Hostel",
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+          var rzp1 = new Razorpay(options);
+          document.getElementById("rzp-button1").onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+          };
+        </script>
+      </div>
+    </body>
+  </html>
+
+
+
+
+
+
+</body>
+
+</html>

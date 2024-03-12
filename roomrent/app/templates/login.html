@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    <h1> this is Login page: </h1>
+
+
+    <label for="uname"> User Name </label>
+    <input type="text" id="uname" name="uname"> </br> </br>
+
+
+    <label for="passx"> Password </label>
+    <input type="password" id="passx" name="passx"> </br>
+
+    <button type="submit"> Submit </button>
+
+
+</form>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="flex min-h-screen items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md p-8 bg-white rounded shadow-md">
+      <h1 class="text-2xl text-center font-bold mb-4">Login</h1>
+      <form  method="post" class="space-y-4">
+        {% csrf_token %}
+        <div class="flex flex-col">
+          <label for="uname" class="text-sm font-medium mb-2">Username:</label>
+          <input type="text" id="uname" name="uname" class="rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="flex flex-col">
+          <label for="passx" class="text-sm font-medium mb-2">Password:</label>
+          <input type="password" id="passx" name="passx" class="rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
